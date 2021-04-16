@@ -13,18 +13,23 @@ import java.util.Collections;
 @Entity
 @Table(name = "library_users")
 public class User implements UserDetails {
-    @Id
-    String username;
-    String password;
-    String name;
-    String surname;
-    @Enumerated(value = EnumType.STRING)
-    UserRoles role;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(role);
-    }
+    @Id
+    private String username;
+
+    private String password;
+
+    private String name;
+
+    private String surname;
+
+    private boolean isAccountNonExpired = true;
+    private boolean isAccountNonLocked = true;
+    private boolean isCredentialsNonExpired = true;
+    private boolean isEnabled = true;
+
+    @Enumerated(value = EnumType.STRING)
+    private UserRoles role;
 
     public User() {
     }
@@ -38,22 +43,27 @@ public class User implements UserDetails {
     }
 
     @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(role);
+    }
+
+    @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return isAccountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return isAccountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return isCredentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEnabled;
     }
 }

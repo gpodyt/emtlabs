@@ -13,7 +13,9 @@ public interface BookService {
 
     Optional<Book> save(String name, BookCategory category, Long authorId, Integer availableCopies);
 
-    Optional<Book> edit(Long id, String name, BookCategory category, Long authorId, Integer availableCopie);
+    Optional<Book> edit(Long id, String name, BookCategory category, Long authorId, Integer availableCopies);
+
+    void markAsTaken(Long id);
 
     void deleteById(Long id);
 }
